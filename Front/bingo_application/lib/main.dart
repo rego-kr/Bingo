@@ -1,8 +1,13 @@
+import 'dart:developer';
+
 import 'package:bingo_application/Splash/SplashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_naver_map/flutter_naver_map.dart';
 
-void main() {
+Future<void> main() async {
+  await _initialize();
+
   runApp(const MyApp());
 }
 
@@ -24,4 +29,16 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+_initialize() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await NaverMapSdk.instance.initialize(
+    clientId: 'tb0h58bwym',
+    onAuthFailed: (e) => log('네이버 맵 인증오류 : $e', name: 'onAuthFailed')
+  );
+}
+
+
+
 
