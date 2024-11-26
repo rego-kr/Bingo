@@ -37,4 +37,22 @@ class AppColors{
   static const Color blue_500 = Color(0xFF1691FC);
   static const Color blue_700 = Color(0xFF0B54B5);
   static const Color blue_900 = Color(0xFF042978);
+
+  static const Color text_default = gray_900;
+  static const Color text_sub = gray_800;
+  static const Color text_info = gray_600;
+  static const Color text_disabled = gray_500;
+
+  static const Color border_strong = gray_500;
+  static const Color border_default = gray_400;
+  static const Color border_disabled = gray_100;
+
+  static const Color divider_strong = gray_300;
+  static const Color divider_default = gray_200;
+
+  static const Color bg_deep = gray_100;
+  static const Color bg_shallow = gray_50;
+  static const Color bg_default = gray_0;
+
+
 }
