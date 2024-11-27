@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:bingo_application/Widget/SvgIconWidget.dart';
 import 'package:bingo_application/theme/colors.dart';
+import 'package:bingo_application/theme/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 
@@ -66,10 +68,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget header(){
     return Padding(
-      padding: const EdgeInsets.only(left: 16, right: 16, top: 4),
+      padding: const EdgeInsets.only(left: 16, right: 16, top: 8),
 
       child: Container(
-        height: 44,
+        height: 53,
         width: double.infinity,
         decoration: BoxDecoration(
           color: AppColors.bg_default,
@@ -88,6 +90,88 @@ class _HomeScreenState extends State<HomeScreen> {
           ]
         ),
 
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+
+          children: [
+            headerPlaceInfoTab(),
+            headerMenuBT(),
+          ],
+        ),
+
+
+      ),
+    );
+  }
+
+  Widget headerPlaceInfoTab(){
+    return Padding(
+      padding: const EdgeInsets.only(left: 16),
+      child: SizedBox(
+        height: 44,
+        child: Row(
+          children: [
+            headerSearchContent('ALL'),
+            const SvgIconWidget(assetPath: 'assets/icon/chevron_bottom.svg', w: 24, h: 24, color: AppColors.text_default,),
+            headerSearchedPlacesNumber(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget headerSearchContent(String title){
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        if(title != 'ALL') headerIcon() else const SizedBox.shrink(),
+        headerSearchTitle(title),
+      ],
+    );
+  }
+
+  Widget headerIcon(){
+    return Padding(padding: const EdgeInsets.only(right: 6),
+      child: SizedBox(
+        width: 22,
+        height: 22,
+
+        child: Image.asset(
+          'assets/test/bts.png',
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+
+  Widget headerSearchTitle(String title){
+    return Text(
+      title,
+      style: AppTextStyle.headlineBold.copyWith(
+        color: AppColors.brand_500
+      ),
+    );
+  }
+
+  Widget headerSearchedPlacesNumber(){
+    return Text(
+      '000 places',
+      style: AppTextStyle.headlineBold.copyWith(
+        color: AppColors.text_default
+      ),
+    );
+  }
+
+  Widget headerMenuBT(){
+    return const Padding(
+      padding: EdgeInsets.only(right: 6),
+      child: SizedBox(
+        width: 44,
+        height: 44,
+        child: Center(
+            child: SvgIconWidget(assetPath: 'assets/icon/menu.svg', w: 24, h: 24)
+        ),
 
       ),
     );

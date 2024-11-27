@@ -1,3 +1,4 @@
+import 'package:bingo_application/global/Global.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -17,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    Future.delayed(const Duration(seconds: 2), (){
+    Future.delayed(const Duration(milliseconds: SPLASH_TIME), (){
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => HomeScreen()),
@@ -28,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.brand_40,
+      backgroundColor: AppColors.gray_0,
       body: Center(
         child: Image.asset(
           'assets/icon/splash_center.png',

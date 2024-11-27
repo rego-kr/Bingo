@@ -1,0 +1,1 @@
+const int SPLASH_TIME = 500;
