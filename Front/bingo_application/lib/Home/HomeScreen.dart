@@ -1,10 +1,13 @@
 import 'dart:async';
 
+import 'package:bingo_application/Administrator/AdministratorMain.dart';
 import 'package:bingo_application/Widget/SvgIconWidget.dart';
 import 'package:bingo_application/theme/colors.dart';
 import 'package:bingo_application/theme/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
+
+import '../global/Global.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,7 +18,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   var mapControllerCompleter = Completer();
-  late double statusBarHeight;
 
   @override
   void didChangeDependencies() {
@@ -27,15 +29,15 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: mainWidget()
+      body: mainWidget(context)
     );
   }
 
-  Widget mainWidget(){
+  Widget mainWidget(BuildContext context){
     return Stack(
       children: [
         naverMap(),
-        underStatusBarWidget(),
+        underStatusBarWidget(context),
       ],
     );
   }
@@ -57,16 +59,16 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget underStatusBarWidget(){
+  Widget underStatusBarWidget(BuildContext context){
     return Positioned(
       top: statusBarHeight,
       left: 0,
       right: 0,
-      child: header(),
+      child: header(context),
     );
   }
 
-  Widget header(){
+  Widget header(BuildContext context){
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 16, top: 8),
 
@@ -96,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
           children: [
             headerPlaceInfoTab(),
-            headerMenuBT(),
+            headerMenuBT(context),
           ],
         ),
 
@@ -163,17 +165,28 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget headerMenuBT(){
-    return const Padding(
-      padding: EdgeInsets.only(right: 6),
-      child: SizedBox(
-        width: 44,
-        height: 44,
-        child: Center(
-            child: SvgIconWidget(assetPath: 'assets/icon/menu.svg', w: 24, h: 24)
-        ),
+  Widget headerMenuBT(BuildContext context){
+    return Padding(
+      padding: const EdgeInsets.only(right: 6),
 
+      child: GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: () async {
+          await touchVibrate();
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const AdministratorMain())
+          );
+        },
+        child: Container(
+          width: 44,
+          height: 44,
+          alignment: Alignment.center,
+          child: const SvgIconWidget(assetPath: 'assets/icon/menu.svg', w: 24, h: 24),
+        ),
       ),
+
     );
   }
 }
